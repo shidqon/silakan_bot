@@ -24,7 +24,7 @@ bot.on('text', (msg) => {
   );
 
   if( wrongs.length ) {
-    const warningMsg = "YA AMPUN! Yang bener itu " + wrongs.join(', ') + " buka KBBI sana!";
+    const warningMsg = "YA AMPUN! Yang bener itu " + wrongs.join(', ') + ". Buka KBBI sana!";
     msg.reply.text(warningMsg, { asReply: true });
   }
 });
