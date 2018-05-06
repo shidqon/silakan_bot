@@ -25,7 +25,7 @@ bot.on('text', (msg) => {
 
   if( wrongs.length ) {
     const warningMsg = "YA AMPUN! Yang bener itu 'silakan' buka KBBI sana!";
-    msg.reply.text(warningMsg);
+    msg.reply.text(warningMsg, { asReply: true });
   }
 });
 
