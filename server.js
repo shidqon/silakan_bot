@@ -1,13 +1,32 @@
 const TeleBot = require('./lib/telebot.js');
-const bot = new TeleBot('542872609:AAExPeniw6xESTMptH-feb0mynw0dKIar00');
+const bot = new TeleBot({
+  token: '542872609:AAExPeniw6xESTMptH-feb0mynw0dKIar00',
+  polling: {
+    interval: 500, // Optional. How often check updates (in ms).
+  },
+});
 
-bot.on(['/start', '/hello'], (msg) => msg.reply.text('Selamat datang! Silakan dicoba!'));
+const wordList = require('read-yaml').sync('wordlist.yml');
+
+console.log(wordList)
+
 bot.on('text', (msg) => {
-  const regex = /silahkan/;
-  const warning = regex.test(msg.text);
-  if (warning) {
+  console.log(msg.from.username + ': ' + msg.text)
+
+  wrongs = []
+
+  Object.entries(wordList.substring).forEach(
+    ([wrong, correct]) => {
+      if( msg.text.match(wrong) ){
+        wrongs.push(correct)
+      }
+    }
+  );
+
+  if( wrongs.length ) {
     const warningMsg = "YA AMPUN! Yang bener itu 'silakan' buka KBBI sana!";
     msg.reply.text(warningMsg);
   }
 });
+
 bot.start();
