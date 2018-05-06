@@ -17,7 +17,7 @@ bot.on('text', (msg) => {
 
   Object.entries(wordList.substring).forEach(
     ([wrong, correct]) => {
-      if( msg.text.match(wrong) ){
+      if( msg.text.match(new RegExp(wrong,'i')) ){
         wrongs.push(correct)
       }
     }
