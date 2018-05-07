@@ -10,7 +10,7 @@ const wordList = require('read-yaml').sync('wordlist.yml');
 
 console.log(wordList)
 
-bot.on('text', (msg) => {
+bot.on(['text', 'forward'], (msg) => {
   function replyMessage(message){
     console.log('replying to ' + msg.from.username + ': ' + message)
     msg.reply.text(message, {asReply: true, parseMode: 'markdown', webPreview: false})
