@@ -1,6 +1,17 @@
 ---
 substring:
-  silahkan: silakan
-  merubah: mengubah
+  silakan: silahkan
+  mengubah: merubah
+  diubah: dirubah
+  izin: ijin
+  kedaluwarsa: kadaluarsa|kedaluw?arsa
+  dimakan: di makan
+  diminum: di minum
+  definitely: 'defia?n(a|e)?n?te?ly'
 fullword:
   di mana: dimana
+  di sini: disini
+  di situ: disitu
+  di sana: disana
+  di atas: diatas
+  di bawah: dibawah
