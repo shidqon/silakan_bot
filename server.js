@@ -12,10 +12,6 @@ console.log(wordList)
 
 bot.on('text', (msg) => {
   console.log('(' + msg.chat.type + ' - ' + msg.chat.title + ') ' + msg.from.username + ': ' + msg.text)
-  if( msg.text.match(new RegExp('(shit|n(u|oo)b) bot','i')) ) {
-    msg.reply.text('no u', {asReply: true});
-    return;
-  }
 
   wrongs = []
 
@@ -40,6 +36,19 @@ bot.on('text', (msg) => {
   if( wrongs.length ) {
     const warningMsg = "YA AMPUN! Yang bener itu *" + wrongs.join('*, *') + "*. Buka [KBBI](https://www.kbbi.web.id/" + wrongs[0] + ") sana!";
     msg.reply.text(warningMsg, { asReply: true, parseMode: 'markdown', webPreview: false });
+    return;
+  }
+
+  // sentient bot
+  if( msg.text.match(new RegExp('(shit|n(u|oo)b) bot','i')) ) {
+    msg.reply.text('no u', {asReply: true});
+    return;
+  }
+
+  // dad bot
+  if( dadText = msg.text.match(new RegExp('^i\'? ?a?m\\s(.*)$'),'i') ){
+    msg.reply.text('hi ' + dadText[1] + ', I\'m Zelda!', {asReply: true, webPreview: false});
+    return;
   }
 
 });
