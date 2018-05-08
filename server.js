@@ -10,12 +10,12 @@ const wordList = require('read-yaml').sync('wordlist.yml');
 
 console.log(wordList)
 
-bot.on(['text', 'forward'], (msg) => {
-  function replyMessage(message){
-    console.log('replying to ' + msg.from.username + ': ' + message)
-    msg.reply.text(message, {asReply: true, parseMode: 'markdown', webPreview: false})
-  }
+function replyMessage(replyTo, message, parseMode = 'markdown'){
+  console.log('replying to ' + replyTo.from.username + ': ' + message)
+  replyTo.reply.text(message, {asReply: true, parseMode: parseMode, webPreview: false})
+}
 
+bot.on(['text', 'forward'], (msg) => {
   console.log('(' + msg.chat.type + ' - ' + msg.chat.title + ') ' + msg.from.username + ': ' + msg.text)
 
   wrongs = []
@@ -39,22 +39,31 @@ bot.on(['text', 'forward'], (msg) => {
   );
 
   if( wrongs.length ) {
-    replyMessage("YA AMPUN! Yang bener itu *" + wrongs.join('*, *') + "*. Buka [KBBI](https://www.kbbi.web.id/" + wrongs[0] + ") sana!");
+    replyMessage(msg, "YA AMPUN! Yang bener itu *" + wrongs.join('*, *') + "*. Buka [KBBI](https://www.kbbi.web.id/" + wrongs[0] + ") sana!");
     return;
   }
 
   // sentient bot
-  if( msg.text.match(new RegExp('(shit|n(u|oo)b) bot','i')) ) {
-    replyMessage('no u');
+  if( msg.text.match(new RegExp('(shit|n(u|oo)b) bot', 'i')) ) {
+    replyMessage(msg, 'no u');
     return;
   }
 
   // dad bot
-  if( dadText = msg.text.match(new RegExp('(?:\\n|^)i\'? ?a?m\\s(.*)(?:\\n|$)'),'i') ){
-    replyMessage('hi ' + dadText[1] + ', I\'m Zelda!');
+  if( dadText = msg.text.match(new RegExp('(?:\\n|^)i\'? ?a?m\\s(.*)(?:\\n|$)','i')) ){
+    replyMessage(msg, 'hi ' + dadText[1] + ', I\'m Zelda!');
     return;
   }
-
 });
+
+
+// emojis
+Object.entries(wordList.emojis).forEach(
+  ([keyword, emoji]) => {
+    bot.on('/' + keyword, (msg) => {
+      replyMessage(msg, emoji, 'html');
+    })
+  }
+)
 
 bot.start();
