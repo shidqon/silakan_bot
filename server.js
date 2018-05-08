@@ -48,6 +48,11 @@ bot.on(['text', 'forward'], (msg) => {
     replyMessage(msg, 'no u');
     return;
   }
+  if( msg.text.match(new RegExp('zelda.*kan.*cewe', 'i')) ) {
+    replyMessage(msg, 'oh gitu ya');
+    return;
+  }
+
 
   // dad bot
   if( dadText = msg.text.match(new RegExp('(?:\\n|^)i\'? ?a?m\\s(.*)(?:\\n|$)','i')) ){
