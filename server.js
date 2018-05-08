@@ -44,7 +44,7 @@ bot.on(['text', 'forward'], (msg) => {
   }
 
   // sentient bot
-  if( msg.text.match(new RegExp('(shit|n(u|oo)b) bot', 'i')) ) {
+  if( msg.text.match(new RegExp('(s+h+i+t+|n+(u+|o+)b+) bot', 'i')) ) {
     replyMessage(msg, 'no u');
     return;
   }
