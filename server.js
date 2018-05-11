@@ -18,7 +18,7 @@ function replyMessage(replyTo, message, parseMode = 'markdown'){
 bot.on(['text', 'forward'], (msg) => {
   console.log('(' + msg.chat.type + ' - ' + msg.chat.title + ') ' + msg.from.username + ': ' + msg.text)
 
-  wrongs = []
+  var wrongs = []
 
   // substring check
   Object.entries(wordList.substring).forEach(
